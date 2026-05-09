@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore - Simulador de Compras</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body>
+
+    <!-- Encabezado -->
+    <header class="header">
+        <div class="header-contenido">
+            <h1 class="logo" id="logo-inicio">TechStore</h1>
+            <nav class="nav">
+                <button id="btn-carrito" class="btn-carrito" title="Ver carrito">
+                    🛒 <span id="contador-carrito">0</span>
+                </button>
+            </nav>
+        </div>
+
+        <!-- Barra de pasos (visible solo en el proceso de compra) -->
+        <div id="barra-pasos" class="barra-pasos">
+            <div class="paso" data-paso="1">
+                <span class="paso-numero">1</span>
+                <span class="paso-texto">Carrito</span>
+            </div>
+            <div class="paso-linea"></div>
+            <div class="paso" data-paso="2">
+                <span class="paso-numero">2</span>
+                <span class="paso-texto">Datos</span>
+            </div>
+            <div class="paso-linea"></div>
+            <div class="paso" data-paso="3">
+                <span class="paso-numero">3</span>
+                <span class="paso-texto">Pago</span>
+            </div>
+            <div class="paso-linea"></div>
+            <div class="paso" data-paso="4">
+                <span class="paso-numero">4</span>
+                <span class="paso-texto">Confirmar</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========== PAGINA 1: Productos ========== -->
+    <main class="main">
+
+        <section id="pagina-productos" class="pagina activa">
+
+            <div class="filtros">
+                <h2 class="filtros-titulo">Nuestros Productos</h2>
+                <div class="filtros-botones">
+                    <button class="filtro-btn activo" data-categoria="todos">Todos</button>
+                    <button class="filtro-btn" data-categoria="notebooks">Notebooks</button>
+                    <button class="filtro-btn" data-categoria="celulares">Celulares</button>
+                    <button class="filtro-btn" data-categoria="accesorios">Accesorios</button>
+                </div>
+            </div>
+
+            <div id="contenedor-productos" class="productos-grid">
+                <!-- Renderizado con JS -->
+            </div>
+
+            <div id="cargando" class="cargando">
+                <p>Cargando productos...</p>
+            </div>
+
+        </section>
+
+        <!-- ========== PAGINA 2: Carrito ========== -->
+        <section id="pagina-carrito" class="pagina">
+            <div class="pagina-contenedor">
+                <h2 class="pagina-titulo">Revisa tu carrito</h2>
+
+                <div id="carrito-tabla" class="carrito-tabla">
+                    <!-- Items renderizados con JS -->
+                </div>
+
+                <div id="carrito-pagina-vacio" class="estado-vacio">
+                    <p>Tu carrito esta vacio</p>
+                    <button class="btn-volver-tienda" id="btn-tienda-desde-vacio">Ver productos</button>
+                </div>
+
+                <div id="carrito-pagina-footer" class="carrito-pagina-footer">
+                    <div class="carrito-pagina-total">
+                        <span>Total de la compra:</span>
+                        <span id="carrito-pagina-total">$0</span>
+                    </div>
+                    <div class="carrito-pagina-botones">
+                        <button id="btn-vaciar-carrito" class="btn-secundario">Vaciar carrito</button>
+                        <button id="btn-ir-datos" class="btn-primario">Continuar compra</button>
+                    </div>
+                </div>
+
+                <button id="btn-volver-productos" class="btn-volver">← Seguir comprando</button>
+            </div>
+        </section>
+
+        <!-- ========== PAGINA 3: Datos personales y envio ========== -->
+        <section id="pagina-datos" class="pagina">
+            <div class="pagina-contenedor">
+                <h2 class="pagina-titulo">Datos de envio</h2>
+
+                <form id="form-datos" class="formulario" novalidate>
+                    <div class="form-fila">
+                        <div class="form-grupo">
+                            <label for="nombre-cliente">Nombre completo</label>
+                            <input type="text" id="nombre-cliente" placeholder="Ej: Juan Perez" required>
+                            <span class="form-error"></span>
+                        </div>
+                        <div class="form-grupo">
+                            <label for="email-cliente">Correo electronico</label>
+                            <input type="email" id="email-cliente" placeholder="Ej: juan@mail.com" required>
+                            <span class="form-error"></span>
+                        </div>
+                    </div>
+                    <div class="form-fila">
+                        <div class="form-grupo">
+                            <label for="telefono-cliente">Telefono</label>
+                            <input type="tel" id="telefono-cliente" placeholder="Ej: 11 1234-5678" required>
+                            <span class="form-error"></span>
+                        </div>
+                        <div class="form-grupo">
+                            <label for="cp-cliente">Codigo postal</label>
+                            <input type="text" id="cp-cliente" placeholder="Ej: 1425" required>
+                            <span class="form-error"></span>
+                        </div>
+                    </div>
+                    <div class="form-grupo form-grupo-completo">
+                        <label for="direccion-cliente">Direccion</label>
+                        <input type="text" id="direccion-cliente" placeholder="Ej: Av. Corrientes 1234, 3B" required>
+                        <span class="form-error"></span>
+                    </div>
+                    <div class="form-fila">
+                        <div class="form-grupo">
+                            <label for="ciudad-cliente">Ciudad</label>
+                            <input type="text" id="ciudad-cliente" placeholder="Ej: Buenos Aires" required>
+                            <span class="form-error"></span>
+                        </div>
+                        <div class="form-grupo">
+                            <label for="provincia-cliente">Provincia</label>
+                            <select id="provincia-cliente" required>
+                                <option value="">Selecciona tu provincia</option>
+                                <option value="Buenos Aires">Buenos Aires</option>
+                                <option value="Catamarca">Catamarca</option>
+                                <option value="Chaco">Chaco</option>
+                                <option value="Chubut">Chubut</option>
+                                <option value="Córdoba">Córdoba</option>
+                                <option value="Corrientes">Corrientes</option>
+                                <option value="Entre Ríos">Entre Ríos</option>
+                                <option value="Formosa">Formosa</option>
+                                <option value="Jujuy">Jujuy</option>
+                                <option value="La Pampa">La Pampa</option>
+                                <option value="La Rioja">La Rioja</option>
+                                <option value="Mendoza">Mendoza</option>
+                                <option value="Misiones">Misiones</option>
+                                <option value="Neuquén">Neuquén</option>
+                                <option value="Río Negro">Río Negro</option>
+                                <option value="Salta">Salta</option>
+                                <option value="San Juan">San Juan</option>
+                                <option value="San Luis">San Luis</option>
+                                <option value="Santa Cruz">Santa Cruz</option>
+                                <option value="Santa Fe">Santa Fe</option>
+                                <option value="Santiago del Estero">Santiago del Estero</option>
+                                <option value="Tierra del Fuego">Tierra del Fuego</option>
+                                <option value="Tucumán">Tucumán</option>
+                                <option value="Ciudad Autónoma de Buenos Aires">Ciudad Autónoma de Buenos Aires</option>
+                            </select>
+                            <span class="form-error"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-botones">
+                        <button type="button" id="btn-volver-carrito" class="btn-secundario">← Volver al carrito</button>
+                        <button type="submit" class="btn-primario">Ir al pago</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- ========== PAGINA 4: Metodo de pago ========== -->
+        <section id="pagina-pago" class="pagina">
+            <div class="pagina-contenedor">
+                <h2 class="pagina-titulo">Metodo de pago</h2>
+
+                <form id="form-pago" class="formulario" novalidate>
+                    <div class="opciones-pago">
+                        <label class="opcion-pago">
+                            <input type="radio" name="metodo-pago" value="credito" checked>
+                            <div class="opcion-pago-contenido">
+                                <span class="opcion-pago-icono">💳</span>
+                                <div>
+                                    <strong>Tarjeta de credito</strong>
+                                    <p>Paga hasta en 12 cuotas sin interes</p>
+                                </div>
+                            </div>
+                        </label>
+
+                        <label class="opcion-pago">
+                            <input type="radio" name="metodo-pago" value="debito">
+                            <div class="opcion-pago-contenido">
+                                <span class="opcion-pago-icono">🏦</span>
+                                <div>
+                                    <strong>Tarjeta de debito</strong>
+                                    <p>Pago directo desde tu cuenta bancaria</p>
+                                </div>
+                            </div>
+                        </label>
+
+                        <label class="opcion-pago">
+                            <input type="radio" name="metodo-pago" value="transferencia">
+                            <div class="opcion-pago-contenido">
+                                <span class="opcion-pago-icono">📲</span>
+                                <div>
+                                    <strong>Transferencia bancaria</strong>
+                                    <p>Recibiras los datos para transferir en el siguiente paso</p>
+                                </div>
+                            </div>
+                        </label>
+
+                        <label class="opcion-pago">
+                            <input type="radio" name="metodo-pago" value="efectivo">
+                            <div class="opcion-pago-contenido">
+                                <span class="opcion-pago-icono">💵</span>
+                                <div>
+                                    <strong>Efectivo contra entrega</strong>
+                                    <p>Pagas cuando recibis el pedido en tu domicilio</p>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- Campos de tarjeta (visibles solo con credito o debito) -->
+                    <div id="campos-tarjeta" class="campos-tarjeta">
+                        <div class="form-grupo form-grupo-completo">
+                            <label for="numero-tarjeta">Numero de tarjeta</label>
+                            <input type="text" id="numero-tarjeta" placeholder="1234 5678 9012 3456">
+                            <span class="form-error"></span>
+                        </div>
+                        <div class="form-fila">
+                            <div class="form-grupo">
+                                <label for="vencimiento-tarjeta">Vencimiento</label>
+                                <input type="text" id="vencimiento-tarjeta" placeholder="MM/AA">
+                                <span class="form-error"></span>
+                            </div>
+                            <div class="form-grupo">
+                                <label for="cvv-tarjeta">Codigo de seguridad</label>
+                                <input type="text" id="cvv-tarjeta" placeholder="123">
+                                <span class="form-error"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-botones">
+                        <button type="button" id="btn-volver-datos" class="btn-secundario">← Volver a datos</button>
+                        <button type="submit" class="btn-primario">Revisar pedido</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- ========== PAGINA 5: Confirmacion ========== -->
+        <section id="pagina-confirmacion" class="pagina">
+            <div class="pagina-contenedor">
+                <h2 class="pagina-titulo">Confirma tu pedido</h2>
+
+                <div class="confirmacion-seccion">
+                    <h3>Productos</h3>
+                    <div id="confirmacion-productos" class="confirmacion-lista">
+                        <!-- Renderizado con JS -->
+                    </div>
+                    <p class="confirmacion-total">Total: <span id="confirmacion-total">$0</span></p>
+                </div>
+
+                <div class="confirmacion-seccion">
+                    <h3>Datos de envio</h3>
+                    <div id="confirmacion-datos" class="confirmacion-info">
+                        <!-- Renderizado con JS -->
+                    </div>
+                </div>
+
+                <div class="confirmacion-seccion">
+                    <h3>Metodo de pago</h3>
+                    <div id="confirmacion-pago" class="confirmacion-info">
+                        <!-- Renderizado con JS -->
+                    </div>
+                </div>
+
+                <div class="form-botones">
+                    <button type="button" id="btn-volver-pago" class="btn-secundario">← Volver a pago</button>
+                    <button type="button" id="btn-confirmar-pedido" class="btn-primario">Confirmar pedido</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== PAGINA 6: Pedido exitoso ========== -->
+        <section id="pagina-exito" class="pagina">
+            <div class="pagina-contenedor pagina-exito-contenido">
+                <div class="exito-icono">✅</div>
+                <h2 class="exito-titulo">Pedido confirmado</h2>
+
+                <div class="exito-resumen">
+                    <div class="exito-dato">
+                        <span class="exito-dato-label">Comprador</span>
+                        <span id="exito-nombre" class="exito-dato-valor"></span>
+                    </div>
+                    <div class="exito-dato">
+                        <span class="exito-dato-label">Direccion de entrega</span>
+                        <span id="exito-direccion" class="exito-dato-valor"></span>
+                    </div>
+                    <div class="exito-dato">
+                        <span class="exito-dato-label">Total abonado</span>
+                        <span id="exito-total" class="exito-dato-valor exito-dato-precio"></span>
+                    </div>
+                </div>
+
+                <div class="exito-detalle">
+                    <p>En breve recibiras un correo electronico con la confirmacion del pedido y el numero de seguimiento del envio.</p>
+                </div>
+
+                <button id="btn-volver-inicio" class="btn-primario">Volver a la tienda</button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Panel lateral del carrito (acceso rapido desde la tienda) -->
+    <aside id="panel-carrito" class="panel-carrito">
+        <div class="panel-carrito-header">
+            <h2>Tu Carrito</h2>
+            <button id="btn-cerrar-panel" class="btn-cerrar">&times;</button>
+        </div>
+
+        <div id="panel-carrito-lista" class="carrito-lista">
+            <!-- Renderizado con JS -->
+        </div>
+
+        <div id="panel-carrito-vacio" class="carrito-vacio">
+            <p>El carrito esta vacio</p>
+        </div>
+
+        <div class="panel-carrito-footer">
+            <div class="carrito-total">
+                <span>Total:</span>
+                <span id="panel-carrito-total">$0</span>
+            </div>
+            <button id="btn-ir-carrito" class="btn-checkout" disabled>
+                Ir al carrito
+            </button>
+        </div>
+    </aside>
+
+    <div id="overlay" class="overlay"></div>
+
+    <!-- Libreria externa: Toastify -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <!-- Logica principal -->
+    <script src="js/app.js"></script>
+</body>
+</html>

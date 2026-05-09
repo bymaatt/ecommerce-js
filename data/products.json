@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "nombre": "Notebook Pro X",
+    "categoria": "notebooks",
+    "precio": 450000,
+    "stock": 8,
+    "imagen": "💻",
+    "descripcion": "Notebook 15.6 pulgadas, 16GB RAM, 512GB SSD"
+  },
+  {
+    "id": 2,
+    "nombre": "Notebook Lite",
+    "categoria": "notebooks",
+    "precio": 280000,
+    "stock": 12,
+    "imagen": "💻",
+    "descripcion": "Notebook 14 pulgadas, 8GB RAM, 256GB SSD"
+  },
+  {
+    "id": 3,
+    "nombre": "Notebook Gamer",
+    "categoria": "notebooks",
+    "precio": 750000,
+    "stock": 4,
+    "imagen": "🎮",
+    "descripcion": "Notebook 17 pulgadas, 32GB RAM, 1TB SSD, RTX 4060"
+  },
+  {
+    "id": 4,
+    "nombre": "Smartphone S23",
+    "categoria": "celulares",
+    "precio": 350000,
+    "stock": 15,
+    "imagen": "📱",
+    "descripcion": "Smartphone 6.1 pulgadas, 128GB, cámara 50MP"
+  },
+  {
+    "id": 5,
+    "nombre": "Smartphone A15",
+    "categoria": "celulares",
+    "precio": 180000,
+    "stock": 20,
+    "imagen": "📱",
+    "descripcion": "Smartphone 6.5 pulgadas, 64GB, cámara triple"
+  },
+  {
+    "id": 6,
+    "nombre": "Smartphone P60",
+    "categoria": "celulares",
+    "precio": 520000,
+    "stock": 6,
+    "imagen": "📸",
+    "descripcion": "Smartphone 6.7 pulgadas, 256GB, cámara 108MP"
+  },
+  {
+    "id": 11,
+    "nombre": "Smartphone Moto G14",
+    "categoria": "celulares",
+    "precio": 220000,
+    "stock": 18,
+    "imagen": "📱",
+    "descripcion": "Smartphone 6.5 pulgadas, 128GB, cámara 50MP dual SIM"
+  },
+  {
+    "id": 12,
+    "nombre": "Smartphone Redmi 12",
+    "categoria": "celulares",
+    "precio": 290000,
+    "stock": 10,
+    "imagen": "📱",
+    "descripcion": "Smartphone 6.8 pulgadas, 256GB, cámara 108MP"
+  },
+  {
+    "id": 13,
+    "nombre": "Smartphone iPhone SE",
+    "categoria": "celulares",
+    "precio": 680000,
+    "stock": 5,
+    "imagen": "📱",
+    "descripcion": "Smartphone 4.7 pulgadas, 64GB, chip A15 Bionic"
+  },
+  {
+    "id": 7,
+    "nombre": "Auriculares BT",
+    "categoria": "accesorios",
+    "precio": 35000,
+    "stock": 30,
+    "imagen": "🎧",
+    "descripcion": "Auriculares bluetooth con cancelación de ruido"
+  },
+  {
+    "id": 8,
+    "nombre": "Mouse Inalámbrico",
+    "categoria": "accesorios",
+    "precio": 15000,
+    "stock": 25,
+    "imagen": "🖱️",
+    "descripcion": "Mouse ergonómico inalámbrico recargable"
+  },
+  {
+    "id": 9,
+    "nombre": "Teclado Mecánico",
+    "categoria": "accesorios",
+    "precio": 42000,
+    "stock": 10,
+    "imagen": "⌨️",
+    "descripcion": "Teclado mecánico RGB switches azules"
+  },
+  {
+    "id": 10,
+    "nombre": "Monitor 24 pulgadas",
+    "categoria": "accesorios",
+    "precio": 120000,
+    "stock": 7,
+    "imagen": "🖥️",
+    "descripcion": "Monitor IPS 24 pulgadas Full HD 75Hz"
+  }
+]
